@@ -1,0 +1,2 @@
+source E:/download/esp32-4/build/gdbinit/symbols
+source E:/download/esp32-4/build/gdbinit/connect

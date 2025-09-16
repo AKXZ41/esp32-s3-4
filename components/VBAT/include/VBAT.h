@@ -1,0 +1,9 @@
+
+#ifndef COMPONENTS_VBAT_INCLUDE_VBAT_H_
+#define COMPONENTS_VBAT_INCLUDE_VBAT_H_
+
+
+
+void VBAT_init(void);
+
+#endif /* COMPONENTS_VBAT_INCLUDE_VBAT_H_ */

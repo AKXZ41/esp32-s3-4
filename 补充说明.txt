@@ -1,0 +1,46 @@
+当外部导入一个项目会提示是否复制进工作区
+如果选择导入，那么工作区内会出现一个同名项目，修改将保存在这个项目下，不会修改到导入的哪个项目
+如果选择不导入那么修改会保存到导入的那个项目
+
+freertos的时间片ticks中断间隔的设置
+ticks中断间隔是指每过这一个间隔才会切换任务
+在idf的cmd配置菜单中设置，步骤如下
+1.打开espressif-ide安装时自带的软件ESP-IDF4.4CMD 这个4.4版本也并非需要一模一样是这个软件就行(黑色图标)
+2.填写cd 加项目地址例如 cd C:\Users\esp32-4\Desktop\esp32-4 点击回车(作用就是进入对应的项目)
+3.填写idf.py menuconfig 点击回车进入配置菜单(界面是两边蓝中间灰的)
+4.进入以下路径Component config → FreeRTOS 
+5.(100) Tick rate (HZ),光标移动到这一项点击→键即可设置，范围是1到1000，这个是频率的意思，默认是100hz，就是一秒钟
+内有100个ticks中断，换算过来就是10ms切换一次任务
+
+头文件说明
+以下3个头文件是为了兼容变量，如果变量报错可以添加试试
+#include <stdio.h>
+#include <stdbool.h>
+#include <unistd.h>
+
+以下两个是rtos需要的头文件
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+#include "esp_log.h" 串口发送信息需要的头文件
+#include "nvs_flash.h" WiFi初始化nvs分区需要的头文件
+#include "freertos/event_groups.h" WiFi事件组或默认循环需要的头文件
+
+#include <sys/time.h> 获取系统us级时间需要的头文件
+
+#include <inttypes.h> 串口发送int64_t数据类型需要的函数
+
+#include "esp_system.h"
+#include "esp_log.h"
+#include "driver/uart.h"
+#include "string.h"
+#include "driver/gpio.h"
+#include "math.h"
+
+xTaskGetTickCount()//获取系统ticks数
+
+//获取并打印系统时间（分辨率1us）
+struct timeval tv_now;
+gettimeofday(&tv_now, NULL);
+int64_t time_us = (int64_t)tv_now.tv_sec * 1000000L + (int64_t)tv_now.tv_usec;
+printf("%" PRId64 "\n", time_us);

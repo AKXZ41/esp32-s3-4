@@ -1,0 +1,10 @@
+
+#ifndef COMPONENTS_FLIGHT_CONTROL_PWM_INCLUDE_PWM_H_
+#define COMPONENTS_FLIGHT_CONTROL_PWM_INCLUDE_PWM_H_
+
+#include <stdio.h>
+
+void PWM_init(void);
+void Moto_Pwm(float MOTO1_PWM,float MOTO2_PWM,float MOTO3_PWM,float MOTO4_PWM);
+
+#endif /* COMPONENTS_FLIGHT_CONTROL_PWM_INCLUDE_PWM_H_ */
